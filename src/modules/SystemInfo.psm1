@@ -1,25 +1,7 @@
 ﻿# SystemInfo.psm1
 # Modulo de solo lectura que reune informacion basica del equipo:
 # nombre, sistema operativo, CPU, RAM, discos y tiempo de actividad.
-
-function Get-ITSafeValue {
-    <#
-        Ejecuta un bloque de codigo y, si falla, devuelve "No disponible"
-        en lugar de detener el resto del programa. Se usa para que un dato
-        que no se puede leer no impida ver el resto de la informacion.
-    #>
-    param(
-        [Parameter(Mandatory = $true)]
-        [scriptblock]$ScriptBlock
-    )
-
-    try {
-        & $ScriptBlock
-    }
-    catch {
-        'No disponible'
-    }
-}
+# Usa Get-ITSafeValue del modulo Common.psm1.
 
 function Get-ITSystemInfo {
     <#
@@ -133,3 +115,4 @@ function Show-SystemInfo {
 }
 
 Export-ModuleMember -Function Get-ITSystemInfo, Show-SystemInfo
+

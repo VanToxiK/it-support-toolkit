@@ -7,21 +7,36 @@
 $modulesPath = Join-Path -Path $PSScriptRoot -ChildPath 'modules'
 
 Import-Module (Join-Path $modulesPath 'Logging.psm1') -Force
+Import-Module (Join-Path $modulesPath 'Common.psm1') -Force
 Import-Module (Join-Path $modulesPath 'SystemInfo.psm1') -Force
 Import-Module (Join-Path $modulesPath 'Network.psm1') -Force
+Import-Module (Join-Path $modulesPath 'Cleanup.psm1') -Force
+Import-Module (Join-Path $modulesPath 'Services.psm1') -Force
+Import-Module (Join-Path $modulesPath 'Software.psm1') -Force
+
+# El modo (usuario/administrador) se calcula una sola vez al arrancar.
+$script:isAdminMode = Test-ITIsAdmin
 
 function Show-ITMenu {
     Clear-Host
     Write-Host '======================================' -ForegroundColor Cyan
     Write-Host '        IT SUPPORT TOOLKIT' -ForegroundColor Cyan
     Write-Host '======================================' -ForegroundColor Cyan
+
+    if ($script:isAdminMode) {
+        Write-Host '        Modo: Administrador' -ForegroundColor Green
+    }
+    else {
+        Write-Host '        Modo: Usuario' -ForegroundColor Yellow
+    }
+
     Write-Host ''
     Write-Host ' 1. Información del sistema'
     Write-Host ' 2. Diagnóstico de red'
-    Write-Host ' 3. Reparación básica de red         [Disponible próximamente]' -ForegroundColor DarkGray
-    Write-Host ' 4. Limpieza de temporales           [Disponible próximamente]' -ForegroundColor DarkGray
-    Write-Host ' 5. Estado de servicios clave        [Disponible próximamente]' -ForegroundColor DarkGray
-    Write-Host ' 6. Programas instalados             [Disponible próximamente]' -ForegroundColor DarkGray
+    Write-Host ' 3. Reparación básica de red'
+    Write-Host ' 4. Limpieza de temporales del usuario'
+    Write-Host ' 5. Estado de servicios clave'
+    Write-Host ' 6. Programas instalados'
     Write-Host ' 7. Generar informe HTML             [Disponible próximamente]' -ForegroundColor DarkGray
     Write-Host ''
     Write-Host ' 0. Salir'
@@ -47,10 +62,10 @@ while (-not $exit) {
     switch ($choice) {
         '1' { Show-SystemInfo; Wait-ITKeyPress }
         '2' { Show-NetworkDiagnostics; Wait-ITKeyPress }
-        '3' { Show-ITComingSoon; Wait-ITKeyPress }
-        '4' { Show-ITComingSoon; Wait-ITKeyPress }
-        '5' { Show-ITComingSoon; Wait-ITKeyPress }
-        '6' { Show-ITComingSoon; Wait-ITKeyPress }
+        '3' { Show-ITNetworkRepairMenu }
+        '4' { Show-ITTempCleanup; Wait-ITKeyPress }
+        '5' { Show-ITServicesMenu }
+        '6' { Show-ITInstalledPrograms; Wait-ITKeyPress }
         '7' { Show-ITComingSoon; Wait-ITKeyPress }
         '0' { $exit = $true }
         default {

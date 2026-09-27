@@ -20,13 +20,18 @@ configuración de PowerShell del sistema.
 ## Estructura
 
 ```
-Iniciar.bat              Lanzador
+Iniciar.bat                          Lanzador (modo usuario)
+Iniciar como administrador.bat       Lanzador con elevación UAC
 src/
   ITSupportToolkit.ps1    Menú principal
   modules/
     Logging.psm1          Registro de acciones en log
+    Common.psm1           Utilidades compartidas (admin, confirmaciones)
     SystemInfo.psm1        Opción 1: información del sistema
-    Network.psm1            Opción 2: diagnóstico de red
+    Network.psm1            Opción 2: diagnóstico de red / Opción 3: reparación
+    Cleanup.psm1              Opción 4: limpieza de temporales
+    Services.psm1              Opción 5: servicios clave
+    Software.psm1                Opción 6: programas instalados
 docs/                     Capturas y documentación
 PROJECT_SPEC.md            Alcance completo del proyecto
 ```
@@ -35,9 +40,9 @@ PROJECT_SPEC.md            Alcance completo del proyecto
 
 - **Fase 1 (completa)**: estructura base, logging, información del sistema
   y diagnóstico de red.
-- **Fase 2 (pendiente)**: reparación básica de red y limpieza de temporales.
-- **Fase 3 (pendiente)**: estado de servicios, inventario de programas
-  instalados e informe HTML.
+- **Fase 2 (completa)**: reparación básica de red y limpieza de temporales.
+- **Fase 3 (parcial)**: estado de servicios y programas instalados hechos;
+  falta el informe HTML.
 
 Ver `PROJECT_SPEC.md` para el detalle completo del alcance.
 
