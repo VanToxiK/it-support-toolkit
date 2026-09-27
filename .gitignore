@@ -1,0 +1,13 @@
+# Contexto local del proyecto (no se comparte en el repositorio)
+CLAUDE.md
+
+# Logs generados en local
+*.log
+
+# Archivos propios de Windows
+Thumbs.db
+desktop.ini
+
+# Editores
+.vscode/
+.vs/
