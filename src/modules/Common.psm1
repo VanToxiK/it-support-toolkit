@@ -1,7 +1,17 @@
 ﻿# Common.psm1
 # Utilidades compartidas por el resto de modulos: deteccion de permisos de
-# administrador, confirmaciones S/N, aviso de accion que requiere admin y
-# la funcion segura para leer datos sin detener el programa si algo falla.
+# administrador, confirmaciones S/N, aviso de accion que requiere admin,
+# la funcion segura para leer datos sin detener el programa si algo falla,
+# y la version de la herramienta.
+
+function Get-ITToolkitVersion {
+    <#
+        Devuelve la version de IT Support Toolkit. Unico sitio del proyecto
+        donde se define el numero de version.
+    #>
+
+    return '1.0.0'
+}
 
 function Test-ITIsAdmin {
     <#
@@ -73,4 +83,4 @@ function Get-ITSafeValue {
     }
 }
 
-Export-ModuleMember -Function Test-ITIsAdmin, Confirm-ITAction, Show-ITAdminRequiredMessage, Get-ITSafeValue
+Export-ModuleMember -Function Get-ITToolkitVersion, Test-ITIsAdmin, Confirm-ITAction, Show-ITAdminRequiredMessage, Get-ITSafeValue

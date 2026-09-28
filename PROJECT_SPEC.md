@@ -49,5 +49,5 @@ pruebas declaradas en el punto 2.
 
 - [x] **Fase 1** — Estructura base, logging, opciones 1 y 2 del menú.
 - [x] **Fase 2** — Opciones 3 y 4 (reparación de red y limpieza de temporales).
-- [x] **Fase 3 (parcial)** — Opciones 5 y 6 (servicios clave y programas instalados).
-- [ ] **Fase 3 (pendiente)** — Opción 7 (informe HTML).
+- [x] **Fase 3** — Opciones 5, 6 y 7 (servicios clave, programas instalados e
+  informe HTML). Versión 1.0.0 completa.

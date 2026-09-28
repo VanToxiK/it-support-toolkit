@@ -13,6 +13,7 @@ Import-Module (Join-Path $modulesPath 'Network.psm1') -Force
 Import-Module (Join-Path $modulesPath 'Cleanup.psm1') -Force
 Import-Module (Join-Path $modulesPath 'Services.psm1') -Force
 Import-Module (Join-Path $modulesPath 'Software.psm1') -Force
+Import-Module (Join-Path $modulesPath 'Report.psm1') -Force
 
 # El modo (usuario/administrador) se calcula una sola vez al arrancar.
 $script:isAdminMode = Test-ITIsAdmin
@@ -21,6 +22,7 @@ function Show-ITMenu {
     Clear-Host
     Write-Host '======================================' -ForegroundColor Cyan
     Write-Host '        IT SUPPORT TOOLKIT' -ForegroundColor Cyan
+    Write-Host ('              v{0}' -f (Get-ITToolkitVersion)) -ForegroundColor Cyan
     Write-Host '======================================' -ForegroundColor Cyan
 
     if ($script:isAdminMode) {
@@ -37,7 +39,7 @@ function Show-ITMenu {
     Write-Host ' 4. Limpieza de temporales del usuario'
     Write-Host ' 5. Estado de servicios clave'
     Write-Host ' 6. Programas instalados'
-    Write-Host ' 7. Generar informe HTML             [Disponible próximamente]' -ForegroundColor DarkGray
+    Write-Host ' 7. Generar informe HTML'
     Write-Host ''
     Write-Host ' 0. Salir'
     Write-Host ''
@@ -46,11 +48,6 @@ function Show-ITMenu {
 function Wait-ITKeyPress {
     Write-Host ''
     Read-Host 'Pulsa Enter para volver al menú' | Out-Null
-}
-
-function Show-ITComingSoon {
-    Write-Host ''
-    Write-Host 'Disponible próximamente.' -ForegroundColor DarkYellow
 }
 
 $exit = $false
@@ -66,7 +63,7 @@ while (-not $exit) {
         '4' { Show-ITTempCleanup; Wait-ITKeyPress }
         '5' { Show-ITServicesMenu }
         '6' { Show-ITInstalledPrograms; Wait-ITKeyPress }
-        '7' { Show-ITComingSoon; Wait-ITKeyPress }
+        '7' { Show-ITHtmlReport; Wait-ITKeyPress }
         '0' { $exit = $true }
         default {
             Write-Host ''
